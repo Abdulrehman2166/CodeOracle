@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-obsidian: #000000;
+  --color-neon-blue: #00f2ff;
+  --color-neon-purple: #7000ff;
+  --color-silver-metal: #e5e5e5;
+}
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-slate-300 antialiased overflow-hidden selection:bg-cyan-500/30 selection:text-cyan-200;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/[0.01] backdrop-blur-[50px] border border-white/[0.05] shadow-[0_40px_100px_-20px_rgba(0,0,0,1)];
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+
+  .glass-sidebar {
+    @apply bg-black/60 backdrop-blur-[80px] border-r border-white/[0.03];
+    box-shadow: 10px 0 50px rgba(0,0,0,1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+  }
+
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* ⚡ Electric Atmosphere */
+  .blob {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    animation: move 40s infinite alternate ease-in-out;
+  }
+
+  .blob-2 {
+    background: radial-gradient(circle, rgba(112, 0, 255, 0.03) 0%, transparent 70%);
+    width: 1000px;
+    height: 1000px;
+    animation-delay: -15s;
+  }
+
+  @keyframes move {
+    from { transform: translate(-20%, -20%) rotate(0deg); }
+    to { transform: translate(20%, 20%) rotate(180deg); }
+  }
+
+  .neon-border {
+    position: relative;
+  }
+  
+  .neon-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+  
+  .neon-border:hover::after {
+    border-color: rgba(0, 242, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/5 rounded-full hover:bg-cyan-500/30 transition-colors;
+}
+
+/* 💎 Cyber Transitions */
+.animate-slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scanning-line {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #00f2ff, transparent);
+  animation: scan 4s linear infinite;
+  z-index: 10;
+  opacity: 0.2;
+}
+
+@keyframes scan {
+  from { top: 0; }
+  to { top: 100%; }
+}
